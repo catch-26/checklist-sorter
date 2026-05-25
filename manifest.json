@@ -1,11 +1,11 @@
 {
     "manifest_version": 1,
-    "id": "com.user.checkbox-auto-sorter",
+    "id": "com.user.checklist-sorter",
     "app_min_version": "2.13",
-    "name": "Checkbox Auto-Sorter",
-    "description": "Automatically sorts checkbox lists on toggle: unchecked items rise to top, checked sink to bottom. Desktop sorts and syncs; mobile sees the result.",
+    "name": "Checklist Sorter",
+    "description": "Automatically sorts checklist items on toggle: unchecked items stay in manual order at top, checked items sort alphabetically at bottom.",
     "author": "",
     "homepage_url": "",
-    "version": "1.0.0",
+    "version": "0.3.0",
     "platforms": ["desktop", "mobile"]
 }
