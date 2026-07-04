@@ -1,11 +1,11 @@
 {
     "manifest_version": 1,
     "id": "com.user.checklist-sorter",
-    "app_min_version": "3.1",
+    "app_min_version": "2.13",
     "name": "Checklist Sorter",
-    "description": "Automatically sorts checklist items on toggle: unchecked items stay in manual order at top, checked items sort alphabetically at bottom. Editor-aware: does not reorder under an active cursor (desktop) or during editing (mobile).",
+    "description": "Automatically sorts checklist items on toggle: unchecked items stay in manual order at top, checked items sort alphabetically at bottom.",
     "author": "",
     "homepage_url": "",
-    "version": "0.4.0",
+    "version": "0.4.4",
     "platforms": ["desktop", "mobile"]
 }
