@@ -6,6 +6,6 @@
     "description": "Automatically sorts checklist items on toggle: unchecked items stay in manual order at top, checked items sort alphabetically at bottom.",
     "author": "",
     "homepage_url": "",
-    "version": "0.4.7",
+    "version": "0.4.8",
     "platforms": ["desktop", "mobile"]
 }
