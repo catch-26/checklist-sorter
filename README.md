@@ -9,5 +9,3 @@ Download the latest `.jpl` from [Releases](https://github.com/catch-26/checklist
 ## License
 
 [Apache 2.0](LICENSE)
-
-*Git history was reconstructed from packaged releases; the original development sources are not included.*
