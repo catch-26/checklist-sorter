@@ -69,6 +69,10 @@ done
 
 Do not upload or tag versions not supplied. The supplied archives skip `0.2.0` and `0.4.1`–`0.4.3`; nothing is invented to fill those gaps.
 
+## Dependency updates
+
+[Dependabot](.github/dependabot.yml) is configured to check for **npm** and **GitHub Actions** updates weekly. This reconstructed source tree does not currently contain `package.json`, an npm lockfile, or GitHub Actions workflows, so Dependabot cannot yet update any declared dependencies. When original development manifests or workflows are restored, the checks become useful without changing this configuration. Dependabot does not update dependencies embedded inside historical minified release bundles.
+
 ## Important caveats
 
 - The file named `checklist-sorter-0.1.0.jpl` contains a manifest with **`"version": "1.0.0"`** and the old plugin ID `com.user.checkbox-auto-sorter`. It is tagged `v0.1.0` because that was the supplied archive filename; its contents are **not corrected or rewritten**. This could affect actual Joplin installation/version handling.
