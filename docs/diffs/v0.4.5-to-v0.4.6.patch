@@ -1,0 +1,124 @@
+# v0.4.5 -> v0.4.6
+# index.js is a formatted *comparison view*, not original source.
+--- v0.4.5/index.js [formatted]
++++ v0.4.6/index.js [formatted]
+@@ -2,72 +2,58 @@
+     "use strict";
+     const t = /^(\s*(?:[-*+]|\d+\.)\s+\[)([ xX])(\].*)/;
+     function e(e) { return t.test(e); }
+-    function i(e) { const i = e.match(t); return !!i && ("x" === i[2] || "X" === i[2]); }
+-    function o(t) { return t.replace(/^\s*(?:[-*+]|\d+\.)\s+\[.\]\s*/i, "").toLowerCase(); }
++    function o(e) { const o = e.match(t); return !!o && ("x" === o[2] || "X" === o[2]); }
++    function i(t) { return t.replace(/^\s*(?:[-*+]|\d+\.)\s+\[.\]\s*/i, "").toLowerCase(); }
+     function n(t) { const e = t.match(/^[ \t]*/); return e ? e[0].length : 0; }
+-    function a(t) { const s = t.filter(e).map(n); if (0 === s.length)
+-        return t; const r = Math.min(...s), c = []; let d = 0; for (; d < t.length && (!e(t[d]) || n(t[d]) !== r);)
+-        c.push(t[d]), d++; const u = []; let p = null; for (; d < t.length; d++) {
+-        const a = t[d];
+-        e(a) && n(a) === r ? (p = { head: a, checked: i(a), text: o(a), body: [] }, u.push(p)) : p ? p.body.push(a) : c.push(a);
+-    } const h = [], f = []; for (const t of u)
+-        (t.checked ? f : h).push(t); l && f.sort((t, e) => t.text.localeCompare(e.text)); const m = [...c]; for (const t of [...h, ...f])
+-        m.push(t.head), m.push(...t.body.some(e) ? a(t.body) : t.body); return m; }
+-    function s(t) { const i = t.split("\n"), o = []; let s = [], r = 0; const l = () => { s.length && (o.push(...a(s)), s = []); }; for (const t of i)
+-        e(t) ? (0 === s.length && (r = n(t)), s.push(t)) : s.length > 0 && "" !== t.trim() && n(t) > r ? s.push(t) : (l(), o.push(t)); return l(), o.join("\n"); }
++    function s(t) { const a = t.filter(e).map(n); if (0 === a.length)
++        return t; const r = Math.min(...a), c = []; let d = 0; for (; d < t.length && (!e(t[d]) || n(t[d]) !== r);)
++        c.push(t[d]), d++; const u = []; let h = null; for (; d < t.length; d++) {
++        const s = t[d];
++        e(s) && n(s) === r ? (h = { head: s, checked: o(s), text: i(s), body: [] }, u.push(h)) : h ? h.body.push(s) : c.push(s);
++    } const p = [], f = []; for (const t of u)
++        (t.checked ? f : p).push(t); l && f.sort((t, e) => t.text.localeCompare(e.text)); const m = [...c]; for (const t of [...p, ...f])
++        m.push(t.head), m.push(...t.body.some(e) ? s(t.body) : t.body); return m; }
++    function a(t) { const o = t.split("\n"), i = []; let a = [], r = 0; const l = () => { a.length && (i.push(...s(a)), a = []); }; for (const t of o)
++        e(t) ? (0 === a.length && (r = n(t)), a.push(t)) : a.length > 0 && "" !== t.trim() && n(t) > r ? a.push(t) : (l(), i.push(t)); return l(), i.join("\n"); }
+     let r = 0, l = !0, c = [], d = [];
+     function u(t) { return String(t || "").split(",").map(t => t.trim().toLowerCase()).filter(Boolean); }
+-    async function p() { var t, e; const i = await joplin.settings.values(["sortDelay", "sortCheckedAlpha", "titleFilter", "tagFilter"]); r = Math.max(0, Math.min(1e4, null !== (t = i.sortDelay) && void 0 !== t ? t : 0)), l = null === (e = i.sortCheckedAlpha) || void 0 === e || e, c = u(i.titleFilter), d = u(i.tagFilter); }
+-    joplin.plugins.register({ onStart: async function () { await joplin.settings.registerSection("checklistSorter", { label: "Checklist Sorter", iconName: "fas fa-check-square", description: "Automatic sorting is applied to notes matched by the title terms and tags below." }), await joplin.settings.registerSettings({ titleFilter: { value: "", type: 2, section: "checklistSorter", public: !0, label: "Note titles containing", description: "Comma-separated terms. A note is sorted if its title contains any one of them. Example: shopping, groceries" }, tagFilter: { value: "", type: 2, section: "checklistSorter", public: !0, label: "Notes tagged with", description: "Comma-separated tag names. A note is sorted if it carries any one of them. Example: list, todo" }, sortCheckedAlpha: { value: !0, type: 3, section: "checklistSorter", public: !0, label: "Sort checked items alphabetically", description: "On: checked items are sorted A to Z at the bottom. Off: checked items keep their manual order at the bottom." }, sortDelay: { value: 0, type: 1, section: "checklistSorter", public: !0, label: "Sort delay (ms)", description: "Wait time after the last change before sorting. 0 = immediate (default)." } }), await p(), await joplin.settings.onChange(p); let t = !1; try {
++    async function h() { var t, e; const o = await joplin.settings.values(["sortDelay", "sortCheckedAlpha", "titleFilter", "tagFilter"]); r = Math.max(0, Math.min(1e4, null !== (t = o.sortDelay) && void 0 !== t ? t : 0)), l = null === (e = o.sortCheckedAlpha) || void 0 === e || e, c = u(o.titleFilter), d = u(o.tagFilter); }
++    joplin.plugins.register({ onStart: async function () { await joplin.settings.registerSection("checklistSorter", { label: "Checklist Sorter", iconName: "fas fa-check-square", description: "Automatic sorting is applied to notes matched by the title terms and tags below." }), await joplin.settings.registerSettings({ titleFilter: { value: "", type: 2, section: "checklistSorter", public: !0, label: "Note titles containing", description: "Comma-separated terms. A note is sorted if its title contains any one of them. Example: shopping, groceries" }, tagFilter: { value: "", type: 2, section: "checklistSorter", public: !0, label: "Notes tagged with", description: "Comma-separated tag names. A note is sorted if it carries any one of them. Example: list, todo" }, sortCheckedAlpha: { value: !0, type: 3, section: "checklistSorter", public: !0, label: "Sort checked items alphabetically", description: "On: checked items are sorted A to Z at the bottom. Off: checked items keep their manual order at the bottom." }, sortDelay: { value: 0, type: 1, section: "checklistSorter", public: !0, label: "Sort delay (ms)", description: "Wait time after the last change before sorting. 0 = immediate (default)." } }), await h(), await joplin.settings.onChange(h); let t = !1; try {
+             const e = await joplin.versionInfo();
+             t = "mobile" === String((null == e ? void 0 : e.platform) || "").toLowerCase();
+         }
+         catch (e) {
+             t = !1;
+-        } const e = new Map, i = new Set, o = new Map, n = new Set, a = new Set; async function l(t) { if (!n.has(t)) {
+-            n.add(t);
++        } const e = new Map, o = new Map, i = new Set, n = new Set; async function s(t) { if (!i.has(t)) {
++            i.add(t);
+             try {
+-                const i = await joplin.data.get(["notes", t], { fields: ["id", "title", "body"] });
+-                if (!(null == i ? void 0 : i.body))
++                const o = await joplin.data.get(["notes", t], { fields: ["id", "title", "body"] });
++                if (!(null == o ? void 0 : o.body))
+                     return;
+-                if (e.get(i.id) === i.body)
++                if (e.get(o.id) === o.body)
+                     return;
+                 if (!await async function (t) { if (0 === c.length && 0 === d.length)
+                     return !1; const e = (t.title || "").toLowerCase(); if (c.some(t => e.includes(t)))
+                     return !0; if (d.length > 0) {
+-                    const e = await joplin.data.get(["notes", t.id, "tags"], { fields: ["title"] }), i = Array.isArray(e.items) ? e.items.map(t => String(t.title).toLowerCase()) : [];
+-                    if (d.some(t => i.includes(t)))
++                    const e = await joplin.data.get(["notes", t.id, "tags"], { fields: ["title"] }), o = Array.isArray(e.items) ? e.items.map(t => String(t.title).toLowerCase()) : [];
++                    if (d.some(t => o.includes(t)))
+                         return !0;
+-                } return !1; }(i))
++                } return !1; }(o))
+                     return;
+-                const o = s(i.body);
+-                if (o === i.body)
++                const i = a(o.body);
++                if (i === o.body)
+                     return;
+-                e.set(i.id, o), a.add(t), await joplin.data.put(["notes", i.id], null, { body: o });
++                e.set(o.id, i), n.add(t), await joplin.data.put(["notes", o.id], null, { body: i });
+             }
+             finally {
+-                n.delete(t);
++                i.delete(t);
+             }
+-        } } function u(t) { const e = o.get(t); e && clearTimeout(e), 0 !== r ? o.set(t, setTimeout(async () => { o.delete(t), await l(t); }, r)) : l(t); } await joplin.workspace.onNoteChange(async (o) => { var n; if (a.delete(o.id))
+-            e.delete(o.id);
+-        else {
+-            if (t) {
+-                let t = "";
+-                try {
+-                    t = (null === (n = await joplin.workspace.selectedNote()) || void 0 === n ? void 0 : n.id) || "";
+-                }
+-                catch (e) {
+-                    t = "";
+-                }
+-                return o.id === t ? void i.add(o.id) : void u(o.id);
+-            }
+-            u(o.id);
+-        } }), await joplin.workspace.onNoteSelectionChange(async () => { var t; if (0 === i.size)
+-            return; let e = ""; try {
+-            e = (null === (t = await joplin.workspace.selectedNote()) || void 0 === t ? void 0 : t.id) || "";
++        } } function l(t) { const e = o.get(t); e && (clearTimeout(e), o.delete(t)), s(t); } await joplin.workspace.onNoteChange(i => { n.delete(i.id) ? e.delete(i.id) : function (e) { const i = o.get(e); i && clearTimeout(i); const n = t ? Math.max(1500, r) : r; 0 !== n ? o.set(e, setTimeout(async () => { o.delete(e), await s(e); }, n)) : s(e); }(i.id); }), await joplin.workspace.onNoteSelectionChange(async () => { var e; if (!t || 0 === o.size)
++            return; let i = ""; try {
++            i = (null === (e = await joplin.workspace.selectedNote()) || void 0 === e ? void 0 : e.id) || "";
+         }
+         catch (t) {
+-            e = "";
+-        } for (const t of Array.from(i))
+-            t !== e && (i.delete(t), u(t)); }); } });
++            i = "";
++        } for (const t of Array.from(o.keys()))
++            t !== i && l(t); }); } });
+ })();
+
+# Unmodified manifest.json comparison
+--- v0.4.5/manifest.json
++++ v0.4.6/manifest.json
+@@ -6,6 +6,6 @@
+     "description": "Automatically sorts checklist items on toggle: unchecked items stay in manual order at top, checked items sort alphabetically at bottom.",
+     "author": "",
+     "homepage_url": "",
+-    "version": "0.4.5",
++    "version": "0.4.6",
+     "platforms": ["desktop", "mobile"]
+ }
+
+# Added files: (none)
+# Removed files: (none)
