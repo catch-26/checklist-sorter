@@ -1,0 +1,133 @@
+{
+  "provenance": "Supplied JPL tar archives; Git commits/tags reconstructed from snapshots",
+  "releases": [
+    {
+      "tag": "v0.1.0",
+      "archive": "checklist-sorter-0.1.0.jpl",
+      "archive_sha256": "71c103d0d57d21060dc355aa6b9a636014b76d4199760a1ee7a6b4325f261cf2",
+      "archive_mtime_utc": "2026-05-25T01:02:41+00:00",
+      "manifest_version": "1.0.0",
+      "plugin_id": "com.user.checkbox-auto-sorter",
+      "app_min_version": "2.13",
+      "files": {
+        "index.js": "1a234639df98c76b888f85e2cbeb55d1fbaff4ec98330dd295209351d7027f8b",
+        "manifest.json": "647c679e697eea9045c05452d404780d7c3b771b5bbcf2d82d50afedabb76f4e"
+      },
+      "commit": "a71e063e6072e427b52788b87c87469f6df00d74"
+    },
+    {
+      "tag": "v0.3.0",
+      "archive": "checklist-sorter-0.3.0.jpl",
+      "archive_sha256": "b1ce0f6710ce0f2cd8e3adbca783ac46223cf02ea51327a0308b9b1d626b7c18",
+      "archive_mtime_utc": "2026-05-25T21:26:39+00:00",
+      "manifest_version": "0.3.0",
+      "plugin_id": "com.user.checklist-sorter",
+      "app_min_version": "2.13",
+      "files": {
+        "index.js": "d38a530d00d8399fb5db33449c3ab95fc819a85ced540d8d55662cecb1923b48",
+        "manifest.json": "5ba9b2022f1c034e9bdf0a665ba72f5d53e71e00cbe3dc6954850215a81c94c8"
+      },
+      "commit": "f0e2b2575f2f0540b7c141757d0743fa560223c0"
+    },
+    {
+      "tag": "v0.4.0",
+      "archive": "checklist-sorter-0.4.0.jpl",
+      "archive_sha256": "7f132c7aba72c1b864c582565839311dcd70e135074c33d6421a4b9049d17e45",
+      "archive_mtime_utc": "2026-06-21T14:16:12+00:00",
+      "manifest_version": "0.4.0",
+      "plugin_id": "com.user.checklist-sorter",
+      "app_min_version": "3.1",
+      "files": {
+        "contentScript.js": "6872db6de337f04b299fdaab567427aa299153a81f92c9385cd98b8abc41246b",
+        "index.js": "d79efdc0149554d08ebf9873f99b61adee1890b92a9556366b3e84386d7a338b",
+        "manifest.json": "435fdc1aaac144edee86cb645f585695e7b98511012999ef41e30b015c644692"
+      },
+      "commit": "27817b8a10a914ee4f72116861e3d8f92f3b31b5"
+    },
+    {
+      "tag": "v0.4.4",
+      "archive": "checklist-sorter-0.4.4.jpl",
+      "archive_sha256": "f7d3b775eb64f369e22179d1194307bc4f02ab539829dbebd6729aebf803ec3e",
+      "archive_mtime_utc": "2026-07-04T22:44:08+00:00",
+      "manifest_version": "0.4.4",
+      "plugin_id": "com.user.checklist-sorter",
+      "app_min_version": "2.13",
+      "files": {
+        "index.js": "498f46398205b6aa16168e4f7e858682436b1edaa3755a6901bf6f6871e8ba68",
+        "manifest.json": "85b1467b2e07ff811413499265ca5534454692b61bc47df68bf0ab9908c78d40"
+      },
+      "commit": "3a25d76ffca0241bb1bf1ef165aa981fd50c5ea5"
+    },
+    {
+      "tag": "v0.4.5",
+      "archive": "checklist-sorter-0.4.5.jpl",
+      "archive_sha256": "43032f5b1d2a0edc3aaeeb0b3087c000a111581eb732b76fc4884ac8f14d398f",
+      "archive_mtime_utc": "2026-07-04T23:13:49+00:00",
+      "manifest_version": "0.4.5",
+      "plugin_id": "com.user.checklist-sorter",
+      "app_min_version": "2.13",
+      "files": {
+        "index.js": "b615ad5d3ec7a9e397685dc982091be323f2bb440d8b380e1db6848c7f2c7fb2",
+        "manifest.json": "ec445bbb3caf61a8a17d8eb5e94c584df6ae8489304e04e0b4dc34cd22271ec7"
+      },
+      "commit": "13cc2d26229d86e681791fa3644af88ba92d3c23"
+    },
+    {
+      "tag": "v0.4.6",
+      "archive": "checklist-sorter-0.4.6.jpl",
+      "archive_sha256": "e2f490dce8ced81e619e18d4b07cd3d1bd0048bc3dc678c7b684acdeb3409c93",
+      "archive_mtime_utc": "2026-07-04T23:29:16+00:00",
+      "manifest_version": "0.4.6",
+      "plugin_id": "com.user.checklist-sorter",
+      "app_min_version": "2.13",
+      "files": {
+        "index.js": "c7dd23269ecf226ffae5247a8e0c28c373994cf8de1698a5422c260bbdfcc692",
+        "manifest.json": "33ad157506112c43b491bf5e46525effd4af4754ea342908a3c8fddf76ddbafd"
+      },
+      "commit": "ed84a338add592ef19823a91e162debc4f5de0fa"
+    },
+    {
+      "tag": "v0.4.7",
+      "archive": "checklist-sorter-0.4.7.jpl",
+      "archive_sha256": "2b3d9688cd2b6a5ed0709788f30f8483649d346cba88f9cf78389ccf401c0882",
+      "archive_mtime_utc": "2026-07-04T23:53:31+00:00",
+      "manifest_version": "0.4.7",
+      "plugin_id": "com.user.checklist-sorter",
+      "app_min_version": "2.13",
+      "files": {
+        "editorState.js": "478e6659ac3dd02bc8518feee66c2c53a72b39161f10faee1887b03de00e69d3",
+        "index.js": "1950f3a7e2e70cf0942deddbbc88687c3e378372344cff2f24b9be1f1ef74359",
+        "manifest.json": "d4adbc81e6677ea9a886baf9a380c21b8fd36a373539eebbb7282bf65352986c"
+      },
+      "commit": "3b59b795b3b7b44ef5117ff306d04b2a81e2be6c"
+    },
+    {
+      "tag": "v0.4.8",
+      "archive": "checklist-sorter-0.4.8.jpl",
+      "archive_sha256": "d806dfe8754d5b3f6cb34adf569a5021f7ad0ea38d70b44eaaafa272ba547815",
+      "archive_mtime_utc": "2026-07-05T12:45:32+00:00",
+      "manifest_version": "0.4.8",
+      "plugin_id": "com.user.checklist-sorter",
+      "app_min_version": "2.13",
+      "files": {
+        "index.js": "15b6a8f19a2f21ee57b25e06e903f19a239adec7b2089158381b28f019ed6725",
+        "manifest.json": "5e0b0ff0e9bdc1734cf3b38d1df8b1b319d13e53e1b294509db9fcd6d0737bb9"
+      },
+      "commit": "64e7e821d361f370abe04661ff7994886ca86454"
+    },
+    {
+      "tag": "v0.4.9",
+      "archive": "checklist-sorter-0.4.9.jpl",
+      "archive_sha256": "e73d1e5e1f6da6f2b1ef5210b40e9349ebc4e5dd4ec12a2a159646233ff43616",
+      "archive_mtime_utc": "2026-07-05T14:57:23+00:00",
+      "manifest_version": "0.4.9",
+      "plugin_id": "com.user.checklist-sorter",
+      "app_min_version": "2.13",
+      "files": {
+        "index.js": "4ddcd8a25264863fdb133977699046961dc4de63d89c30df05048627cc4ef789",
+        "manifest.json": "4e6f1954ec5e6ebf80dd38f32312b7b1d42564c2f1fc07407ca1b37ad93110d1"
+      },
+      "commit": "3ff90543616d6f5d51bc34258288b695099ee13f"
+    }
+  ]
+}
