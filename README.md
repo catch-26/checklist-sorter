@@ -71,7 +71,7 @@ Do not upload or tag versions not supplied. The supplied archives skip `0.2.0` a
 
 ## Dependency updates
 
-[Dependabot](.github/dependabot.yml) is configured to check for **npm** and **GitHub Actions** updates weekly. This reconstructed source tree does not currently contain `package.json`, an npm lockfile, or GitHub Actions workflows, so Dependabot cannot yet update any declared dependencies. When original development manifests or workflows are restored, the checks become useful without changing this configuration. Dependabot does not update dependencies embedded inside historical minified release bundles.
+[Dependabot](.github/dependabot.yml) checks **npm** and **GitHub Actions** weekly, each grouped into one pull request. Security updates for alerted dependencies are opened as soon as an alert appears, independent of that schedule. This reconstructed source tree does not contain `package.json` or an npm lockfile, so the npm check has nothing to update until original development manifests are restored. Dependabot does not update dependencies embedded inside historical minified release bundles.
 
 ## Important caveats
 
