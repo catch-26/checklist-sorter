@@ -4,6 +4,14 @@ This repository reconstructs **nine historical Joplin plugin release snapshots**
 
 **This is not the original development repository.** The supplied plugin archives contain compiled/bundled JavaScript, not the original editable TypeScript project, build configuration, tests, or source maps. No original intervening commits, author identities, or original release dates can be recovered from them. Reconstructed commit/tag timestamps use the latest internal archive member modification time, not verified Git commit or published release times.
 
+## License and attribution
+
+**Checklist Sorter is released under the [Apache License, Version 2.0](LICENSE)** for the project material that its copyright holders are authorized to license. The `LICENSE` file contains the complete, unmodified Apache 2.0 terms. See [NOTICE](NOTICE) for the original project's design attribution; redistributors of derivative works must preserve applicable attribution notices under Apache 2.0 Section 4(d).
+
+The original plugin creator provided the concept, functionality and user-experience design, with AI assistance used to implement the plugin. **Before publishing, replace the generic creator attribution in `NOTICE` with your own name or GitHub handle.** The supplied `.jpl` packages have an empty `author` field, so this reconstruction cannot independently identify the copyright holder; do not substitute the reconstruction commit identity for the real author.
+
+The historical version tags reproduce the uploaded releases exactly and **do not contain a `LICENSE` or `NOTICE` file**. Licensing and attribution documentation is introduced on `main` without rewriting those immutable snapshots. This does not establish rights over any third-party code. In particular, the historical `v0.4.7` package contains bundled CodeMirror-related third-party code; preserve and verify the applicable third-party MIT copyright/license notices before redistributing that bundle. The original packages provide neither a dependency manifest nor complete third-party notices.
+
 ## Releases
 
 | Git tag | Main change visible in the package |
@@ -66,7 +74,7 @@ Do not upload or tag versions not supplied. The supplied archives skip `0.2.0` a
 - The file named `checklist-sorter-0.1.0.jpl` contains a manifest with **`"version": "1.0.0"`** and the old plugin ID `com.user.checkbox-auto-sorter`. It is tagged `v0.1.0` because that was the supplied archive filename; its contents are **not corrected or rewritten**. This could affect actual Joplin installation/version handling.
 - The v0.4.0 package contains `contentScript.js`; v0.4.7 contains a much larger `editorState.js`. The other supplied versions lack those files; their additions and removals are intentionally represented as Git changes.
 - The `.jpl` files provided here are **tar archives despite the `.jpl` suffix**. These files are copied unchanged into `release-assets/`. The repository does not claim to compile or reproduce the original packaging process.
-- A license was not included in the archives. No license is inferred or invented; confirm redistribution rights before publicly distributing.
+- The historical archives had no `LICENSE` or `NOTICE`; Apache 2.0 and the design attribution are added only on `main`. Confirm the right to license project-owned code and preserve third-party notices, especially for the `v0.4.7` bundle.
 - `release-assets/` is included in the downloaded ZIP but ignored by Git so release binaries do not obscure the code history. `git push` does **not** upload those files; attach them with `gh release create` as shown.
 
 ## Verification
