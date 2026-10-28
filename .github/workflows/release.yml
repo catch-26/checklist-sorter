@@ -1,0 +1,89 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+      - name: Decide whether to publish
+        id: plan
+        run: |
+          version="$(jq -r .version manifest.json)"
+          tag="v$version"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          if [[ "$GITHUB_REF_NAME" == *-pre ]]; then
+            echo "::notice::Pre-release tag $GITHUB_REF_NAME is handled by prerelease.yml"
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ "$GITHUB_REF_TYPE" = tag ] && [ "$GITHUB_REF_NAME" != "$tag" ]; then
+            echo "::error file=manifest.json::Pushed tag $GITHUB_REF_NAME does not match manifest version $tag"
+            exit 1
+          fi
+          if ! [[ "$version" =~ ^[0-9]{2}\.[0-9]{2}\.[0-9]+$ ]]; then
+            echo "::notice file=manifest.json::Version $version is not in the YY.MM.N scheme; nothing to publish"
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if gh release view "$tag" > /dev/null 2>&1; then
+            echo "::notice::Release $tag already exists; nothing to publish"
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if git rev-parse -q --verify "refs/tags/$tag-pre" > /dev/null; then
+            echo "::error file=manifest.json::$tag is already used by pre-release $tag-pre; bump to the next number"
+            exit 1
+          fi
+          echo "publish=true" >> "$GITHUB_OUTPUT"
+      - name: Validate
+        if: steps.plan.outputs.publish == 'true'
+        run: .github/scripts/validate.sh
+      - name: Extract release notes
+        if: steps.plan.outputs.publish == 'true'
+        run: |
+          tag="${{ steps.plan.outputs.tag }}"
+          awk -v tag="$tag" '
+            $0 ~ "^# " && found { exit }
+            index($0, "# " tag " ") == 1 || $0 == "# " tag { found = 1; next }
+            found { print }
+          ' CHANGELOG.md | sed -e '/./,$!d' > notes.md
+          if ! grep -q '[^[:space:]]' notes.md; then
+            line="$(grep -n -m1 '^#' CHANGELOG.md | cut -d: -f1)"
+            echo "::error file=CHANGELOG.md,line=${line:-1}::No \"# $tag (YYYY-MM-DD)\" section with bullets in CHANGELOG.md"
+            exit 1
+          fi
+          cat notes.md
+      - name: Package
+        if: steps.plan.outputs.publish == 'true'
+        run: .github/scripts/package.sh "${{ steps.plan.outputs.version }}" "checklist-sorter-${{ steps.plan.outputs.version }}.jpl"
+      - name: Publish release
+        if: steps.plan.outputs.publish == 'true'
+        run: |
+          tag="${{ steps.plan.outputs.tag }}"
+          if git rev-parse -q --verify "refs/tags/$tag" > /dev/null; then
+            target=(--verify-tag)
+          else
+            target=(--target "$GITHUB_SHA")
+          fi
+          gh release create "$tag" "checklist-sorter-${{ steps.plan.outputs.version }}.jpl" "${target[@]}" --title "$tag" --notes-file notes.md --latest

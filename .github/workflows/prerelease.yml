@@ -1,0 +1,44 @@
+name: Pre-release
+
+on:
+  push:
+    branches: [prerelease]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  prerelease:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+      - name: Validate
+        run: .github/scripts/validate.sh
+      - name: Pick next version
+        id: plan
+        run: |
+          month="$(TZ=Europe/Berlin date +%y.%m)"
+          last="$(git tag -l "v$month.*" | sed -E "s/^v${month//./\\.}\.([0-9]+)(-pre)?$/\1/;t;d" | sort -n | tail -n1)"
+          n=$(( ${last:--1} + 1 ))
+          version="$month.$n"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=v$version-pre" >> "$GITHUB_OUTPUT"
+          echo "Next pre-release: v$version-pre"
+      - name: Package
+        run: .github/scripts/package.sh "${{ steps.plan.outputs.version }}" "checklist-sorter-${{ steps.plan.outputs.version }}-pre.jpl"
+      - name: Publish pre-release
+        run: |
+          printf 'Test build from %s (%s).\n' "$GITHUB_REF_NAME" "${GITHUB_SHA::7}" > notes.md
+          gh release create "${{ steps.plan.outputs.tag }}" "checklist-sorter-${{ steps.plan.outputs.version }}-pre.jpl" --target "$GITHUB_SHA" --title "${{ steps.plan.outputs.tag }}" --notes-file notes.md --prerelease --latest=false
