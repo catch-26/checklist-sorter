@@ -1,0 +1,65 @@
+name: Joplin compatibility
+
+on:
+  schedule:
+    - cron: "0 5 * * 5"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ISSUE_TITLE: Joplin compatibility check failed
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Resolve Joplin versions
+        id: refs
+        run: |
+          minor=$(jq -r .app_min_version manifest.json)
+          min=$(git ls-remote --tags --refs https://github.com/laurent22/joplin.git "refs/tags/v${minor}.*" | awk -F/ '{print $3}' | sort -V | tail -1)
+          releases=$(gh api "repos/laurent22/joplin/releases?per_page=50")
+          stable=$(jq -r '[.[] | select(.prerelease | not) | select(.tag_name | test("^v[0-9]+\\.[0-9]+\\.[0-9]+$"))][0].tag_name // ""' <<< "$releases")
+          pre=$(jq -r '[.[] | select(.prerelease) | select(.tag_name | test("^v[0-9]+\\.[0-9]+\\.[0-9]+$"))][0].tag_name // ""' <<< "$releases")
+          if [ -n "$pre" ] && [ "$(printf '%s\n%s\n' "$stable" "$pre" | sort -V | tail -1)" != "$pre" ]; then pre=""; fi
+          if [ "$pre" = "$stable" ]; then pre=""; fi
+          {
+            echo "min=$min"
+            echo "stable=$stable"
+            echo "pre=$pre"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Check plugin API calls
+        id: check
+        run: |
+          set +e
+          python3 .github/scripts/joplin_compat.py "app_min_version=${{ steps.refs.outputs.min }}" "latest stable=${{ steps.refs.outputs.stable }}" "latest pre-release=${{ steps.refs.outputs.pre }}" "dev branch=dev" > report.md
+          status=$?
+          cat report.md >> "$GITHUB_STEP_SUMMARY"
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+
+      - name: Open or update issue
+        if: steps.check.outputs.status != '0'
+        run: |
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          printf '%s\n\nRun: %s\n' "$(cat report.md)" "$run_url" > body.md
+          number=$(gh issue list --state open --search "in:title \"$ISSUE_TITLE\"" --json number,title --jq ".[] | select(.title == \"$ISSUE_TITLE\") | .number" | head -1)
+          if [ -n "$number" ]; then
+            gh issue comment "$number" --body-file body.md
+          else
+            gh issue create --title "$ISSUE_TITLE" --body-file body.md
+          fi
+          exit 1
+
+      - name: Close resolved issue
+        if: steps.check.outputs.status == '0'
+        run: |
+          number=$(gh issue list --state open --search "in:title \"$ISSUE_TITLE\"" --json number,title --jq ".[] | select(.title == \"$ISSUE_TITLE\") | .number" | head -1)
+          if [ -n "$number" ]; then
+            gh issue close "$number" --comment "Check passes again: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          fi
