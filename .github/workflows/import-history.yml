@@ -1,0 +1,56 @@
+name: Import historical releases
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ZIP_COMMIT: 6c2a0e37458e212586f66a807669d62cc6a897bc
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Unpack original packages
+        run: |
+          git show "$ZIP_COMMIT:checklist-sorter-git-history.zip" > "$RUNNER_TEMP/history.zip"
+          unzip -q "$RUNNER_TEMP/history.zip" -d "$RUNNER_TEMP/history"
+      - name: Create tags and releases
+        run: |
+          set -euo pipefail
+          assets="$RUNNER_TEMP/history/checklist-sorter/release-assets"
+          jq -c '.releases[]' docs/release-manifest.json | while read -r release; do
+            tag="$(jq -r .tag <<< "$release")"
+            commit="$(jq -r .commit <<< "$release")"
+            archive="$(jq -r .archive <<< "$release")"
+            sha="$(jq -r .archive_sha256 <<< "$release")"
+            if [ "$(git cat-file -t "$commit" 2>/dev/null)" != commit ]; then
+              echo "::error file=docs/release-manifest.json::$tag: commit $commit not found"
+              exit 1
+            fi
+            if ! echo "$sha  $assets/$archive" | sha256sum -c --quiet -; then
+              echo "::error file=docs/release-manifest.json::$tag: $archive does not match its recorded SHA-256"
+              exit 1
+            fi
+            if gh release view "$tag" > /dev/null 2>&1; then
+              echo "::notice::$tag already released, skipping"
+              continue
+            fi
+            awk -v h="## $tag" '
+              found && /^#/ { exit }
+              $0 == h { found = 1; next }
+              found { print }
+            ' CHANGELOG.md | sed -e '/./,$!d' > notes.md
+            if ! grep -q '[^[:space:]]' notes.md; then
+              echo "::error file=CHANGELOG.md::No \"## $tag\" section in CHANGELOG.md"
+              exit 1
+            fi
+            printf '\nHistorical release, reconstructed from the original package. The attached file is that package, unchanged.\n' >> notes.md
+            gh release create "$tag" "$assets/$archive" --target "$commit" --title "$tag" --notes-file notes.md --latest=false
+            echo "Released $tag at ${commit::7}"
+          done
