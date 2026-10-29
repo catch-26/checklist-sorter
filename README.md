@@ -8,6 +8,8 @@ Requires Joplin 3.2 or newer.
 
 Download the latest `.jpl` from [Releases](https://github.com/catch-26/checklist-sorter/releases) and install it through Joplin's plugin settings.
 
+Upgrading from 0.4.x or earlier: the plugin ID changed to `io.github.catch-26.checklist-sorter`, so Joplin installs it as a new plugin. Uninstall the old Checklist Sorter and enter your settings again.
+
 ## Usage
 
 The plugin only sorts notes you pick in Joplin's settings, under **Checklist Sorter**. With both fields empty, nothing is sorted.
