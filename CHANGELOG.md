@@ -1,3 +1,9 @@
+# v26.10.0 (2026-10-30)
+
+- The plugin ID is now io.github.catch-26.checklist-sorter (was com.user.checklist-sorter).
+- Requires Joplin 3.2 or later (was 2.13).
+- The plugin author is now listed as catch-26.
+
 # Reconstructed changelog
 
 The entries below describe **observable changes between supplied compiled bundles**; they are not copied from original maintainer release notes and are not proof of behavior on every Joplin platform. The archive timestamps are reconstructed metadata and are not authenticated release dates.
