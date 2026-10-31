@@ -16,7 +16,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       ISSUE_TITLE: Joplin compatibility check failed
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       - name: Resolve Joplin versions
         id: refs

@@ -13,7 +13,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       ZIP_COMMIT: 6c2a0e37458e212586f66a807669d62cc6a897bc
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Unpack original packages
