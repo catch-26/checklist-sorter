@@ -1,3 +1,7 @@
+# v26.11.1 (2026-11-01)
+
+- No changes to the plugin. The npm package now has a provenance statement linking it to this repository.
+
 # v26.11.0 (2026-11-01)
 
 - Available in Joplin's plugin search (Settings > Plugins).
