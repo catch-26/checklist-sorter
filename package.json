@@ -1,0 +1,17 @@
+{
+  "name": "joplin-plugin-checklist-sorter",
+  "version": "0.0.0",
+  "description": "Joplin plugin that keeps unchecked checklist items in their original order and sorts checked items alphabetically at the bottom.",
+  "keywords": ["joplin-plugin"],
+  "license": "Apache-2.0",
+  "author": "catch-26",
+  "homepage": "https://github.com/catch-26/checklist-sorter#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/catch-26/checklist-sorter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/catch-26/checklist-sorter/issues"
+  },
+  "files": ["publish/"]
+}

@@ -20,3 +20,7 @@ jobs:
         run: .github/scripts/validate.sh
       - name: Package plugin
         run: .github/scripts/package.sh "$(jq -r .version manifest.json)" checklist-sorter.jpl
+      - name: Check npm package
+        run: |
+          .github/scripts/npm-package.sh "$(jq -r .version manifest.json)"
+          npm pack --dry-run
