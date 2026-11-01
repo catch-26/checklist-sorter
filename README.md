@@ -6,7 +6,7 @@ A [Joplin](https://joplinapp.org/) plugin that keeps unchecked checklist items i
 
 Requires Joplin 3.2 or newer.
 
-Download the latest `.jpl` from [Releases](https://github.com/catch-26/checklist-sorter/releases) and install it through Joplin's plugin settings.
+In Joplin, open **Settings > Plugins**, search for **Checklist Sorter** and install it. You can also download the latest `.jpl` from [Releases](https://github.com/catch-26/checklist-sorter/releases) and install it from a file in the same settings screen.
 
 Upgrading from 0.4.x or earlier: the plugin ID changed to `io.github.catch-26.checklist-sorter`, so Joplin installs it as a new plugin. Uninstall the old Checklist Sorter and enter your settings again.
 

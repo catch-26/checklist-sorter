@@ -5,7 +5,10 @@
     "name": "Checklist Sorter",
     "description": "Automatically sorts checklist items on toggle: unchecked items stay in manual order at top, checked items sort alphabetically at bottom.",
     "author": "catch-26",
-    "homepage_url": "",
-    "version": "26.10.0",
+    "homepage_url": "https://github.com/catch-26/checklist-sorter",
+    "repository_url": "https://github.com/catch-26/checklist-sorter",
+    "keywords": ["checklist", "checkbox", "sort", "todo", "list"],
+    "categories": ["productivity", "editor"],
+    "version": "26.11.0",
     "platforms": ["desktop", "mobile"]
 }

@@ -1,3 +1,8 @@
+# v26.11.0 (2026-11-01)
+
+- Available in Joplin's plugin search (Settings > Plugins).
+- The plugin listing now links to the GitHub repository and has keywords and categories.
+
 # v26.10.0 (2026-10-30)
 
 - The plugin ID is now io.github.catch-26.checklist-sorter (was com.user.checklist-sorter).
