@@ -9,6 +9,6 @@
     "repository_url": "https://github.com/catch-26/checklist-sorter",
     "keywords": ["checklist", "checkbox", "sort", "todo", "list"],
     "categories": ["productivity", "editor"],
-    "version": "26.11.1",
+    "version": "26.11.3",
     "platforms": ["desktop", "mobile"]
 }

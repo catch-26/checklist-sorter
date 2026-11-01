@@ -1,3 +1,9 @@
+# v26.11.3 (2026-11-01)
+
+- On desktop, sorting no longer reloads the open note or resets the scroll position.
+- Note titles containing: a term in double quotes, such as "shopping list", now matches only a note with exactly that title.
+- Shorter, clearer description for the Note titles containing setting.
+
 # v26.11.1 (2026-11-01)
 
 - No changes to the plugin. The npm package now has a provenance statement linking it to this repository.
